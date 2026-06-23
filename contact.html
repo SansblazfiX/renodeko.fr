@@ -98,6 +98,8 @@
     placeholder="Votre message"
     required></textarea>
 
+    <input type="hidden" name="date_envoi">
+
     <button
     type="submit"
     class="btn-primary">
@@ -147,6 +149,13 @@
 
       document.querySelector('form[name="contact"]').addEventListener('submit', function(e) {
         e.preventDefault();
+
+        const dateChamp = this.querySelector('input[name="date_envoi"]');
+        const maintenant = new Date();
+        dateChamp.value = maintenant.toLocaleString('fr-FR', {
+          dateStyle: 'long',
+          timeStyle: 'short'
+        });
 
         emailjs.sendForm('service_llpy9lc', 'template_l6gcigx', this)
           .then(() => {
