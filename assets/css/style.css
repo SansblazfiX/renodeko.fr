@@ -119,8 +119,6 @@ nav a:hover{
     overflow: hidden;
 }
 
-/* Diaporama du hero — contrôlé par JavaScript */
-/* Place tes fichiers : hero-banner1.jpg, hero-banner2.jpg, hero-banner3.jpg */
 .hero-bg{
     position: absolute;
     inset: 0;
@@ -135,7 +133,6 @@ nav a:hover{
     opacity: 1;
 }
 
-/* Overlay sombre pour lisibilité du texte */
 .hero-overlay{
     position: absolute;
     inset: 0;
@@ -201,19 +198,6 @@ nav a:hover{
     color:var(--blue);
 }
 
-/* anciens cards conservés au cas où utilisés ailleurs */
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-.card{
-    background:rgba(255,255,255,0.92);
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
 /* ── SERVICE CARDS AVEC HOVER IMAGE ── */
 .service-cards{
     display:grid;
@@ -259,7 +243,6 @@ nav a:hover{
     transition:opacity 0.35s ease;
 }
 
-/* titre toujours visible en bas même sans hover */
 .service-card-overlay h3{
     color:white;
     font-size:1.15rem;
@@ -299,7 +282,6 @@ nav a:hover{
     color:var(--dark);
 }
 
-/* état sans hover : juste le titre visible */
 .service-card::before{
     content:'';
     position:absolute;
@@ -452,28 +434,77 @@ nav a:hover{
     opacity:0.85;
 }
 
-/* ── FOURNISSEURS ── */
+/* ── FOURNISSEURS — BANDEAU DÉFILANT (géré par JS) ── */
 .suppliers-preview{
     padding:80px 0;
 }
 
-.logos{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:50px;
+.suppliers-preview .container{
+    margin-bottom:40px;
 }
 
-.logos img{
-    max-height:60px;
-    min-width:80px;
+.logos-marquee{
+    width:100%;
+    overflow:hidden;
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 8%,
+        black 92%,
+        transparent 100%
+    );
+}
+
+/* Le track n'a plus d'animation CSS — c'est le JS qui gère le défilement */
+.logos-track{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    width:max-content;
+    will-change: transform;
+}
+
+.logo-card{
+    background:white;
+    border-radius:5px;
+    padding:18px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:180px;
+    min-height:90px;
+    flex-shrink:0;
+}
+
+.logo-card img{
+    max-height:90px;
+    max-width:240px;
     object-fit:contain;
 }
 
-.logos img[src=""],
-.logos img:not([src]){
-    display:none;
+/* ── BANNIÈRE DE PAGE ── */
+.page-banner{
+    padding:80px 0;
+    background:#f8f8f8;
+}
+
+.page-banner h1{
+    font-size:42px;
+    color:var(--blue);
+    margin-bottom:20px;
+}
+
+.page-banner p{
+    margin-bottom:30px;
+    max-width:800px;
+    line-height:1.7;
 }
 
 /* ── CTA ── */
@@ -564,6 +595,10 @@ footer a:hover{
 
     .hero h1{
         font-size:32px;
+    }
+
+    .page-banner h1{
+        font-size:34px;
     }
 
     .hero-overlay{
